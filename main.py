@@ -27,8 +27,10 @@ def main() -> None:
         if command == 'add':
             title: str = input("Введите заголовок заметки: ")
             body: str = input("Введите тело заметки: ")
-            note_manager.add_note(title, body)
-            print("Заметка успешно сохранена")
+            if note_manager.add_note(title, body):
+                print("Заметка успешно сохранена")
+            else:
+                print("Заголовок и описание не могут быть пустыми. Заметка не сохранена.")
 
         elif command == 'edit':
             note_id: int = int(input("Введите ID заметки для редактирования: "))
@@ -64,7 +66,8 @@ def main() -> None:
             note_id: int = int(input("Введите ID заметки: "))
             note: Note = note_manager.get_note_by_id(note_id)
             if note:
-                print(f"ID: {note.note_id}, Заголовок: {note.title}, Тело заметки: {note.body}, Дата создания: {note.created_at}")
+                print(
+                    f"ID: {note.note_id}, Заголовок: {note.title}, Тело заметки: {note.body}, Дата создания: {note.created_at}")
             else:
                 print("Заметка с указанным ID не найдена")
 
